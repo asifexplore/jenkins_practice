@@ -41,6 +41,7 @@ pipeline {
 				}
 			}
 			steps {
+				sh 'chmod ugo+rwx ./app.py'
 				sh 'chmod +x ./app.py'
 				sh 'chmod +x ./test_ui.py'
 				sh 'nohup python3 app.py & pytest -s -rA --junitxml=logs/report.xml'
