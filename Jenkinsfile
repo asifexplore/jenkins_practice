@@ -1,12 +1,6 @@
 pipeline {
 	agent any
 	stages {
-		stage('Setup bridge network') {
-			agent any
-				steps {
-					sh 'docker network create --driver bridge my-net'
-				}
-	    }
 		stage('Dependency Check') {
 			steps {
 				git 'https://github.com/asifexplore/jenkins_practice.git'
