@@ -37,6 +37,7 @@ pipeline {
 				}
 			}
 			steps {
+				sh 'chmod +x ./test_ui.py'
 				sh 'nohup python3 app.py & pytest -s -rA --junitxml=logs/report.xml'
 				sh 'pkill -f app.py'
 			}
