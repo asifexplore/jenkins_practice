@@ -15,6 +15,11 @@ pipeline {
 		}
 		stage('Integration UI Test')
 		{
+			agent {
+				docker {
+					image 'yanxun-image:latest'
+				}
+			}
 			steps {
 				sh 'nohup python3 app.py & pytest -s -rA --junitxml=logs/report.xml'
 				sh 'pkill -f app.py'
