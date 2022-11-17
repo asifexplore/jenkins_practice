@@ -1,14 +1,9 @@
 pipeline {
 	agent any
 	stages {
-		stage('Checkout SCM') {
+		stage('Dependency Check') {
 			steps {
 				git 'https://github.com/asifexplore/jenkins_practice.git'
-			}
-		}
-
-		stage('OWASP DependencyCheck') {
-			steps {
 				dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'Default'
 			}
 		}
