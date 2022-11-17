@@ -7,6 +7,28 @@ pipeline {
 				dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'Default'
 			}
 		}
+		stage('Build') { 
+            steps {
+                script {
+                    try {
+                        // clean all unused images
+                        sh 'yes | docker image prune -a'
+                    }
+                    catch (Exception e) {
+                        echo "no unused images deleted"
+                    }
+                    try {
+                        // clean all unused containers
+                        sh 'yes | docker container prune'
+                    }
+                    catch (Exception e) {
+                        echo "no unused containers deleted"
+                    }
+                }
+                // ensure latest image is being build
+                sh 'docker build -t yanxun-image:latest .'
+            }
+        }
 		stage('Integration UI Test')
 		{
 			agent {
