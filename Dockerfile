@@ -1,4 +1,5 @@
 FROM python:3.9
+USER root
 ADD . /yanxun
 WORKDIR /yanxun
 RUN pip install --upgrade pip
